@@ -25,7 +25,7 @@ public class Ship
     private Date prodDate;
 
     @Column(name = "isUsed")
-    private boolean isUsed;
+    private Boolean isUsed;
 
     @Column(name = "speed")
     private Double speed;
@@ -33,7 +33,7 @@ public class Ship
     @Column(name = "crewSize")
     private Integer crewSize;
 
-    @Column(name = "crewSize")
+    @Column(name = "rating")
     private Double rating;
 
     public Long getId() {
@@ -76,11 +76,11 @@ public class Ship
         this.prodDate = prodDate;
     }
 
-    public boolean isUsed() {
+    public Boolean isUsed() {
         return isUsed;
     }
 
-    public void setUsed(boolean used) {
+    public void setUsed(Boolean used) {
         isUsed = used;
     }
 

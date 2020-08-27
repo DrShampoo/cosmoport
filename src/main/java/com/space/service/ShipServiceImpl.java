@@ -78,7 +78,7 @@ public class ShipServiceImpl implements ShipService {
                 .filter(o -> shipType == null || o.getShipType().equals(shipType))
                 .filter(o -> after == null || o.getProdDate().getTime() >= new Date(after).getTime())
                 .filter(o -> before == null || o.getProdDate().getTime() <= new Date(before).getTime())
-                .filter(o -> isUsed == null || o.isUsed()==(isUsed))
+                .filter(o -> isUsed == null || o.isUsed().equals(isUsed))
                 .filter(o -> minSpeed == null || o.getSpeed() >= minSpeed)
                 .filter(o -> maxSpeed == null || o.getSpeed() <= maxSpeed)
                 .filter(o -> minCrewSize == null || o.getCrewSize() >= minCrewSize)
