@@ -4,8 +4,8 @@ import com.space.controller.ShipOrder;
 import com.space.model.Ship;
 import com.space.model.ShipType;
 import com.space.repository.ShipRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.time.ZoneId;
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ShipServiceImpl implements ShipService {
-    @Autowired
+
     ShipRepository shipRepository;
 
     @Override//1
@@ -24,6 +24,10 @@ public class ShipServiceImpl implements ShipService {
 
     @Override//1
     public Ship create(Ship ship) {
+        if (ship.isUsed() == null) {
+            ship.setUsed(false);
+        }
+        ship.setSpeed((double) Math.round(ship.getSpeed() * 100) / 100);
         ship.setRating(ratingCalc(ship));
        return shipRepository.save(ship);
     }
@@ -122,4 +126,5 @@ public class ShipServiceImpl implements ShipService {
         double rating = (80 * ship.getSpeed() * value) / (3019 - year + 1d);
         return (double) Math.round(rating * 100) / 100;
     }
+
 }

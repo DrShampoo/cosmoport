@@ -85,8 +85,9 @@ public class ShipController {
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<Ship> updateShip(@RequestBody Ship ship, @PathVariable Long id) {
-        if (ship == null || isCheckId(id) || isCheckName(ship.getName()) || isCheckPlanet(ship.getPlanet())
-                || isCheckProdDate(ship.getProdDate()) || isCheckSpeed(ship.getSpeed()) || isCheckCrewSize(ship.getCrewSize())) {
+        if (ship == null || isCheckId(id) || (ship.getName() != null && isCheckName(ship.getName()))
+                || (ship.getPlanet() != null && isCheckPlanet(ship.getPlanet())) || (ship.getProdDate() != null && isCheckProdDate(ship.getProdDate()))
+                || (ship.getSpeed() != null && isCheckSpeed(ship.getSpeed())) || (ship.getCrewSize() != null && isCheckCrewSize(ship.getCrewSize()))) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else if (shipService.updateShip(ship, id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
