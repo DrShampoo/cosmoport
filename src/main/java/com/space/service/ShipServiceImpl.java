@@ -117,11 +117,9 @@ public class ShipServiceImpl implements ShipService {
     }
 
     public Double ratingCalc (Ship ship) {//1
-        double value;
-        if (ship.isUsed()) value = 0.5;
-        else value = 1;
+        double value = ship.isUsed() ? 0.5 : 1.0;
         int year = ship.getProdDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();
-        double rating = (80 * ship.getSpeed() * value) / (3019d - year +1);
+        double rating = (80 * ship.getSpeed() * value) / (3019 - year + 1d);
         return (double) Math.round(rating * 100) / 100;
     }
 }
