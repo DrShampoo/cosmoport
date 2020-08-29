@@ -4,6 +4,7 @@ import com.space.controller.ShipOrder;
 import com.space.model.Ship;
 import com.space.model.ShipType;
 import com.space.repository.ShipRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class ShipServiceImpl implements ShipService {
 
+    @Autowired
     ShipRepository shipRepository;
 
     @Override//1
