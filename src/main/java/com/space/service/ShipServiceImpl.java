@@ -19,12 +19,12 @@ public class ShipServiceImpl implements ShipService {
     @Autowired
     ShipRepository shipRepository;
 
-    @Override//1
+    @Override
     public List<Ship> getAllShip() {
         return shipRepository.findAll();
     }
 
-    @Override//1
+    @Override
     public Ship create(Ship ship) {
         if (ship.isUsed() == null) {
             ship.setUsed(false);
@@ -34,7 +34,7 @@ public class ShipServiceImpl implements ShipService {
        return shipRepository.save(ship);
     }
 
-    @Override//1
+    @Override
     public Ship updateShip(Ship ship, long id) {
         Ship oldShip = getShip(id);
         if (oldShip == null) {
@@ -62,7 +62,7 @@ public class ShipServiceImpl implements ShipService {
         return shipRepository.save(oldShip);
     }
 
-    @Override//1
+    @Override
     public boolean deleteShip(long id) {
         if (shipRepository.existsById(id)) {
             shipRepository.deleteById(id);
@@ -71,12 +71,12 @@ public class ShipServiceImpl implements ShipService {
         return false;
     }
 
-    @Override//1
+    @Override
     public Ship getShip(long id) {
         return shipRepository.findById(id).orElse(null);
     }
 
-    @Override//1
+    @Override
     public List<Ship> getFilteredShipList(String name, String planet, ShipType shipType, Long after, Long before, Boolean isUsed, Double minSpeed, Double maxSpeed, Integer minCrewSize, Integer maxCrewSize, Double minRating, Double maxRating) {
         return getAllShip().stream()
                 .filter(o -> name == null || o.getName().contains(name))
@@ -94,7 +94,7 @@ public class ShipServiceImpl implements ShipService {
                 .collect(Collectors.toList());
     }
 
-    @Override//3
+    @Override
     public List<Ship> sortShips(List<Ship> ships, ShipOrder order) {
         if (order != null) {
             ships.sort((ship1, ship2) -> {
@@ -111,7 +111,7 @@ public class ShipServiceImpl implements ShipService {
     }
 
 
-    public List<Ship> getPage(List<Ship> ship, Integer pageNumber, Integer pageSize) {//3
+    public List<Ship> getPage(List<Ship> ship, Integer pageNumber, Integer pageSize) {
         Integer page = pageNumber == null ? 0 : pageNumber;
         Integer size = pageSize == null ? 3 : pageSize;
         int x = page * size;
@@ -122,7 +122,7 @@ public class ShipServiceImpl implements ShipService {
         return ship.subList(x, y);
     }
 
-    public Double ratingCalc (Ship ship) {//1
+    public Double ratingCalc (Ship ship) {
         double value = ship.isUsed() ? 0.5 : 1.0;
         int year = ship.getProdDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();
         double rating = (80 * ship.getSpeed() * value) / (3019 - year + 1d);
